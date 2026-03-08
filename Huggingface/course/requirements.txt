@@ -1,0 +1,39 @@
+# Hugging Face NLP Course - pinned dependencies
+# Usage:
+#   conda activate hf_course
+#   pip install -r requirements.txt
+# Note:
+#   These CUDA wheels require the PyTorch CU126 index:
+#   pip install --index-url https://download.pytorch.org/whl/cu126 -r requirements.txt
+
+# Deep learning framework (CUDA 12.6)
+torch==2.9.1+cu126
+torchvision==0.24.1+cu126
+torchaudio==2.9.1+cu126
+
+# Core Hugging Face ecosystem
+transformers==5.3.0
+datasets==4.6.1
+tokenizers==0.22.2
+accelerate==1.13.0
+evaluate==0.4.6
+
+# NLP utilities
+sentencepiece==0.2.1
+sacremoses==0.1.1
+
+# Data science
+numpy==2.3.5
+pandas==3.0.1
+scikit-learn==1.8.0
+scipy==1.17.1
+
+# Image processing
+pillow==12.0.0
+
+# Evaluation
+rouge-score==0.1.2
+seqeval==1.2.2
+
+# Demo UI (chapter9)
+gradio==6.9.0

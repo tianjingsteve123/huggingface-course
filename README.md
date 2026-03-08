@@ -2,6 +2,10 @@
 
 Run-ready and commit-ready Hugging Face course scripts, with repeatable GitHub publishing workflow for open source contributors.
 
+Re-implementations of huggingface NLP course content https://huggingface.co/learn/llm-course
+
+IDE platform - cursor, WSL environment
+
 ## What this repository contains
 
 - `Huggingface/course/chapter1.py` to `chapter9.py`: executable learning scripts.

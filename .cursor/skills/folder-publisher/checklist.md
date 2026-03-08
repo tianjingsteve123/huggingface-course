@@ -11,6 +11,7 @@ Use this checklist before every folder-only GitHub publish.
 ## B. Access and target validation
 
 - [ ] GitHub owner and repository name are verified.
+- [ ] Authenticated GitHub account slug is verified (`ssh -T` result).
 - [ ] SSH key or token authentication works.
 - [ ] Remote repository exists (or create it first).
 
@@ -23,11 +24,13 @@ Use this checklist before every folder-only GitHub publish.
 ## D. Push strategy
 
 - [ ] Normal push if remote is empty or fast-forward compatible.
-- [ ] Merge if remote history must be preserved.
+- [ ] Merge if remote has initial commit and history must be preserved.
 - [ ] Force push only when folder-only cleanup is required.
+- [ ] `--force-with-lease` preferred over plain `--force` when replacing history.
 
 ## E. Post-push checks
 
 - [ ] Remote root contents match intended scope.
 - [ ] Latest commit message is clear and professional.
 - [ ] User receives repo URL and final verification summary.
+- [ ] Common errors were checked (`publickey`, `repo not found`, `fetch first`).

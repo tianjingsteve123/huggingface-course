@@ -6,7 +6,7 @@ alwaysApply: true
 
 # Folder Publish Guardrails
 
-When the user asks to upload or push a specific folder, enforce a folder-scoped publishing workflow.
+When the user asks to upload or push a specific folder, enforce a strict folder-scoped publishing workflow.
 
 ## Core rules
 
@@ -21,17 +21,26 @@ When the user asks to upload or push a specific folder, enforce a folder-scoped 
 
 3. Validate remote target before push:
    - Confirm GitHub owner and repository name exactly.
+   - Confirm repository exists or create it first.
    - Confirm authentication path (SSH key or token) is valid.
+   - Do not assume username casing; verify real account slug.
 
 4. Handle remote history safely:
    - If remote has existing commits and histories diverge, decide strategy:
      - preserve remote history: merge, then push
      - replace remote history with approved scope only: force push
    - Prefer `--force-with-lease` when replacing history.
+   - If the remote has a platform-initial commit (for example only `LICENSE`), merge first unless user asks for strict replacement.
 
 5. Verify result after push:
    - Check remote root file tree.
    - Confirm only approved folder(s) plus metadata are present.
+   - Report final repository URL and latest pushed commit.
+
+6. SSH/network reliability:
+   - Prefer SSH over port 22 first, then use 443 fallback only when network requires it.
+   - Avoid long blind waits; use bounded retries and explicit timeout.
+   - Surface authentication or repository-not-found errors with concrete fixes.
 
 ## Operational checklist
 
@@ -39,11 +48,14 @@ When the user asks to upload or push a specific folder, enforce a folder-scoped 
 - [ ] Clean publish repo is created.
 - [ ] Only approved content is staged.
 - [ ] Remote owner/repo is verified.
+- [ ] Remote existence is verified.
 - [ ] Push strategy is chosen safely.
 - [ ] Remote content is verified post-push.
+- [ ] Final URL + commit hash is reported.
 
 ## Never-do list
 
 - Never push unrelated folders when user requested folder-only publishing.
 - Never use blind waiting loops for network issues.
 - Never assume GitHub username casing or repo existence without verification.
+- Never force push without explicit scope-cleanup intent.

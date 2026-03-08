@@ -1,6 +1,6 @@
 # huggingface-course
 
-Run-ready and commit-ready Hugging Face course scripts, optimized for WSL Ubuntu and repeatable GitHub publishing.
+Run-ready and commit-ready Hugging Face course scripts, with repeatable GitHub publishing workflow for open source contributors.
 
 ## What this repository contains
 
@@ -28,14 +28,18 @@ Run-ready and commit-ready Hugging Face course scripts, optimized for WSL Ubuntu
 │   └── skills/
 │       └── folder-publisher/
 │           ├── SKILL.md
-│           └── checklist.md
+│           ├── checklist.md
+│           └── examples.md
 └── LICENSE
 ```
 
-## Environment setup (WSL Ubuntu)
+## Environment setup (Linux/macOS/WSL)
+
+Run commands from repository root, then enter `Huggingface/course`.
+Use relative paths in docs so any contributor can run them in their own local clone.
 
 ```bash
-cd /mnt/c/coding/Huggingface/course
+cd Huggingface/course
 conda create -n hf_course python=3.11 -y
 conda activate hf_course
 pip install --index-url https://download.pytorch.org/whl/cu126 \
@@ -48,7 +52,7 @@ pip install -r requirements.txt
 Quick run (default mode in scripts, minimal download):
 
 ```bash
-cd /mnt/c/coding/Huggingface/course
+cd Huggingface/course
 conda activate hf_course
 HF_QUICK_RUN=1 python chapter1.py
 ```
@@ -62,7 +66,7 @@ HF_QUICK_RUN=0 python chapter1.py
 Run all chapters with intermediate output:
 
 ```bash
-cd /mnt/c/coding/Huggingface/course
+cd Huggingface/course
 conda activate hf_course
 for ch in chapter{1..9}.py; do
   echo "=== Running ${ch} ==="
@@ -73,7 +77,7 @@ done
 ## Validation commands
 
 ```bash
-cd /mnt/c/coding/Huggingface/course
+cd Huggingface/course
 conda activate hf_course
 python test_chapters.py
 ```
@@ -102,5 +106,6 @@ This repository is intentionally published as a **folder-scoped repo** (only tar
 - Rule: `.cursor/rules/folder-publish-guardrails.mdc`
 - Skill: `.cursor/skills/folder-publisher/SKILL.md`
 - Checklist: `.cursor/skills/folder-publisher/checklist.md`
+- Examples: `.cursor/skills/folder-publisher/examples.md`
 
 Use this same rule + skill set when publishing any other folder in your workspace.

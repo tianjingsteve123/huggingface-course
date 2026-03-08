@@ -1,6 +1,6 @@
 # Hugging Face NLP Course - Executable Chapter Scripts
 
-This folder contains runnable scripts `chapter1.py` to `chapter9.py` adapted for WSL Ubuntu development.
+This folder contains runnable scripts `chapter1.py` to `chapter9.py` for Linux/macOS/WSL development.
 
 ## Quality Goals
 
@@ -9,7 +9,9 @@ This folder contains runnable scripts `chapter1.py` to `chapter9.py` adapted for
 - deterministic quick-run mode for IDE run-button validation,
 - clean folder structure suitable for GitHub commits.
 
-## Environment (WSL Ubuntu)
+## Environment Setup
+
+All commands use repository-relative paths so they work for any contributor clone.
 
 ```bash
 conda create -n hf_course python=3.11 -y
@@ -21,7 +23,7 @@ pip install -r requirements.txt
 ## Quick Start
 
 ```bash
-cd /mnt/c/coding/Huggingface/course
+cd Huggingface/course
 conda activate hf_course
 python chapter1.py
 ```
@@ -41,7 +43,7 @@ HF_QUICK_RUN=0 python chapter1.py
 ## Run All Chapters
 
 ```bash
-cd /mnt/c/coding/Huggingface/course
+cd Huggingface/course
 conda activate hf_course
 for ch in chapter{1..9}.py; do
   python -u "$ch" && echo "PASS: $ch" || echo "FAIL: $ch"
@@ -51,6 +53,6 @@ done
 ## Validate Script Structure
 
 ```bash
-cd /mnt/c/coding/Huggingface/course
+cd Huggingface/course
 python test_chapters.py
 ```

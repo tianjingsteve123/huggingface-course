@@ -1,0 +1,49 @@
+---
+description: Guardrails for publishing only selected folders to GitHub from a larger workspace
+globs:
+alwaysApply: true
+---
+
+# Folder Publish Guardrails
+
+When the user asks to upload or push a specific folder, enforce a folder-scoped publishing workflow.
+
+## Core rules
+
+1. Scope first:
+   - Explicitly confirm the exact folder(s) allowed to publish.
+   - Treat all other folders as out of scope by default.
+
+2. Use a clean publishing repo:
+   - Create a temporary clean repository.
+   - Copy only the approved folder(s) and required root metadata files.
+   - Do not publish directly from a dirty monorepo root.
+
+3. Validate remote target before push:
+   - Confirm GitHub owner and repository name exactly.
+   - Confirm authentication path (SSH key or token) is valid.
+
+4. Handle remote history safely:
+   - If remote has existing commits and histories diverge, decide strategy:
+     - preserve remote history: merge, then push
+     - replace remote history with approved scope only: force push
+   - Prefer `--force-with-lease` when replacing history.
+
+5. Verify result after push:
+   - Check remote root file tree.
+   - Confirm only approved folder(s) plus metadata are present.
+
+## Operational checklist
+
+- [ ] Target folder is explicitly defined.
+- [ ] Clean publish repo is created.
+- [ ] Only approved content is staged.
+- [ ] Remote owner/repo is verified.
+- [ ] Push strategy is chosen safely.
+- [ ] Remote content is verified post-push.
+
+## Never-do list
+
+- Never push unrelated folders when user requested folder-only publishing.
+- Never use blind waiting loops for network issues.
+- Never assume GitHub username casing or repo existence without verification.
